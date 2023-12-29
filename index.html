@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transformador de Texto</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <label for="textInput">Ingresa un texto:</label>
+  <input type="text" id="textInput">
+  
+  <div class="color-inputs">
+    <div>
+      <label for="colorInput1">Color 1:</label>
+      <input type="color" id="colorInput1" value="#e67e22"> 
+    </div>
+    <div>
+      <label for="colorInput2">Color 2:</label>
+      <input type="color" id="colorInput2" value="#f1c40f">
+    </div>
+  </div>
+
+  <div class="checkbox-container">
+    <label for="applyCheckbox">Negrita</label>
+    <input type="checkbox" id="applyCheckbox">
+  </div>
+
+  <div id="output">Haz clic aquí para copiar</div>
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
