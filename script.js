@@ -1,11 +1,12 @@
 $(document).ready(function () {
-    $('#textInput, #colorInput1, #colorInput2, #applyCheckbox').on('input', function () {
+    $('#textInput, #colorInput1, #colorInput2, #applyCheckbox, #applyCheckbox2').on('input', function () {
       const inputText = $('#textInput').val();
       const color1 = $('#colorInput1').val();
       const color2 = $('#colorInput2').val();
       const applyGradient = $('#applyCheckbox').is(':checked');
+      const applySymbol = $('#applyCheckbox2').is(':checked');
   
-      const transformedText = transformText(inputText, color1, color2, applyGradient);
+      const transformedText = transformText(inputText, color1, color2, applyGradient, applySymbol);
       $('#output').html(transformedText.replaceAll("##", "#"));
     });
   
@@ -15,7 +16,7 @@ $(document).ready(function () {
       animateCopyFeedback();
     });
   
-    function transformText(text, color1, color2, applyGradient) {
+    function transformText(text, color1, color2, applyGradient, applySymbol) {
       const letterMap = {
         'a': 'ᴀ', 'b': 'ʙ', 'c': 'ᴄ', 'd': 'ᴅ', 'e': 'ᴇ', 'f': 'ꜰ', 'g': 'ɢ',
         'h': 'ʜ', 'i': 'ɪ', 'j': 'ᴊ', 'k': 'ᴋ', 'l': 'ʟ', 'm': 'ᴍ', 'n': 'ɴ',
@@ -27,7 +28,7 @@ $(document).ready(function () {
         return letterMap[char] || char;
       }).join('');
   
-      const gradientText = getGradientText(transformedText, color1, color2, applyGradient);
+      const gradientText = getGradientText(transformedText, color1, color2, applyGradient, applySymbol);
   
       return gradientText.split(' ').map((word, index) => {
         if (word.startsWith('&#')) {
@@ -49,16 +50,19 @@ $(document).ready(function () {
       return rgbToHex(r, g, b);
     }
   
-    function getGradientText(text, color1, color2, applyGradient) {
+    function getGradientText(text, color1, color2, applyGradient, applySymbol) {
       const gradientSteps = text.length;
       let gradientText = '';
   
       for (let i = 0; i < gradientSteps; i++) {
         const gradientColor = calculateGradientColor(color1, color2, i / (gradientSteps - 1));
+        if(applySymbol){
+          gradientText += `&`;
+        }
         if(applyGradient){
-            gradientText += `&#${gradientColor}&l${text[i]}`;
+            gradientText += `#${gradientColor}&l${text[i]}`;
         }else{
-            gradientText += `&#${gradientColor}${text[i]}`;
+            gradientText += `#${gradientColor}${text[i]}`;
         }
         
       }
