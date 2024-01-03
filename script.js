@@ -33,6 +33,8 @@ $(document).ready(function () {
       return gradientText.split(' ').map((word, index) => {
         if (word.startsWith('&#')) {
           return word; 
+        }else if (word.startsWith('#')) {
+          return word; 
         }
   
         return `${calculateGradientColor(color1, color2, index / (transformedText.length - 1))}${word}`;
@@ -52,7 +54,7 @@ $(document).ready(function () {
   
     function getGradientText(text, color1, color2, applyGradient, applySymbol) {
       const gradientSteps = text.length;
-      let gradientText = '';
+      let gradientText = "";
   
       for (let i = 0; i < gradientSteps; i++) {
         const gradientColor = calculateGradientColor(color1, color2, i / (gradientSteps - 1));
